@@ -9,7 +9,7 @@ git clone https://github.com/sarastee/application-design-test
 cd application-design-test
 ```
 
-2. Запустить контейнеры используя `Makefile`:
+2. Запустить приложение используя `Makefile`:
 
 ```bash
 make app-start
