@@ -4,6 +4,8 @@ import (
 	"context"
 	"flag"
 	"log"
+
+	"github.com/sarastee/application-design-test/internal/app"
 )
 
 var configPath string

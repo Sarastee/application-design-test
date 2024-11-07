@@ -87,9 +87,29 @@ func (a *App) initHTTPServer(ctx context.Context) error {
 	mux := a.initRoutes(ctx)
 
 	a.httpServer = &http.Server{
-		Addr:              a.serviceProvider,
+		Addr:              a.serviceProvider.HTTPConfig().Address(),
 		Handler:           mux,
 		ReadHeaderTimeout: 2 * time.Second,
+	}
+
+	return nil
+}
+
+func (a *App) initRoutes(_ context.Context) *http.ServeMux {
+	ai := a.serviceProvider.BookingImplementation()
+	mux := http.NewServeMux()
+
+	mux.Handle("POST /orders", http.HandlerFunc(ai.CreateOrder))
+
+	return mux
+}
+
+func (a *App) runHTTPServer() error {
+	log.Printf("HTTP started at %s", a.serviceProvider.HTTPConfig().Address())
+
+	err := a.httpServer.ListenAndServe()
+	if err != nil {
+		return err
 	}
 
 	return nil
