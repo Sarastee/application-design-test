@@ -7,11 +7,13 @@ import (
 
 var _ service.BookingService = (*Service)(nil)
 
+// Service ...
 type Service struct {
 	orderRepo        repository.OrderRepository
 	availabilityRepo repository.AvailabilityRepository
 }
 
+// NewBookingService ...
 func NewBookingService(orderRepo repository.OrderRepository, availabilityRepo repository.AvailabilityRepository) *Service {
 	return &Service{
 		orderRepo:        orderRepo,

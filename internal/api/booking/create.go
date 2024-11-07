@@ -8,6 +8,7 @@ import (
 	"github.com/sarastee/application-design-test/internal/utils/logger"
 )
 
+// CreateOrder ...
 func (i *Implementation) CreateOrder(w http.ResponseWriter, r *http.Request) {
 	defer func() {
 		err := r.Body.Close()

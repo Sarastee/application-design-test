@@ -7,6 +7,7 @@ import (
 	"github.com/sarastee/application-design-test/internal/repository"
 )
 
+// GetAvailability ...
 func (r *InMemoryAvailabilityRepository) GetAvailability(hotelID, roomID string, date time.Time) (*model.RoomAvailability, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()

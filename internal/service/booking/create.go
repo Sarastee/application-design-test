@@ -8,6 +8,7 @@ import (
 	"github.com/sarastee/application-design-test/internal/utils/date"
 )
 
+// CreateOrder ...
 func (s *Service) CreateOrder(order model.Order) error {
 	if order.From.After(order.To) {
 		return service.ErrIncorrectDate
@@ -23,7 +24,7 @@ func (s *Service) CreateOrder(order model.Order) error {
 		if availability.Quota < 1 {
 			return fmt.Errorf("no available rooms on %v", day.Format("2006-01-02"))
 		}
-		availability.Quota -= 1
+		availability.Quota--
 	}
 
 	if err := s.orderRepo.CreateOrder(order); err != nil {

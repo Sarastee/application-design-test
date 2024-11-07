@@ -1,3 +1,37 @@
+# Запуск приложения:
+
+Порядок действий для запуска приложения:
+
+1. Клонировать репозиторий:
+
+```bash
+git clone https://github.com/sarastee/application-design-test
+cd application-design-test
+```
+
+2. Запустить контейнеры используя `Makefile`:
+
+```bash
+make app-start
+```
+
+3. Тестирование:
+
+Можно использовать предоставленную curl команду:
+
+```bash
+curl --location --request POST 'localhost:8082/orders' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "hotel_id": "reddison",
+    "room_id": "lux",
+    "email": "guest@mail.ru",
+    "from": "2024-01-01T00:00:00Z",
+    "to": "2024-01-03T00:00:00Z"
+}'
+```
+
+
 # Application design
 
 В коде представлен прототип сервиса бронирования номеров в отелях,
@@ -42,21 +76,3 @@
 Спросим что будет если продакт решит добавить какую-то новую фичу — как она ляжет
 на предложенную тобой структуру. Также можем поговорить и о более технических вещах:
 о значениях и указателях, многопоточности, интерфейсах, каналах.
-
-## Например
-
-```sh
-go run main.go
-```
-
-```sh
-curl --location --request POST 'localhost:8082/orders' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "hotel_id": "reddison",
-    "room_id": "lux",
-    "email": "guest@mail.ru",
-    "from": "2024-01-02T00:00:00Z",
-    "to": "2024-01-04T00:00:00Z"
-}'
-```
