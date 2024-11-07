@@ -21,10 +21,13 @@ func (s *Service) CreateOrder(order model.Order) error {
 		if err != nil {
 			return fmt.Errorf("not available on %v: %w", day.Format("2006-01-02"), err)
 		}
+		s.mu.Lock()
 		if availability.Quota < 1 {
+			s.mu.Unlock()
 			return fmt.Errorf("no available rooms on %v", day.Format("2006-01-02"))
 		}
-		availability.Quota--
+		availability.Quota-- // TODO: transactional
+		s.mu.Unlock()
 	}
 
 	if err := s.orderRepo.CreateOrder(order); err != nil {
@@ -32,5 +35,4 @@ func (s *Service) CreateOrder(order model.Order) error {
 	}
 
 	return nil
-
 }
